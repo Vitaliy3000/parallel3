@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+task1/results/*
+task1/results_bg/*
+task1/results_polus/*
+task1/pictures/*
+task1/report.py
+task1/report_*
+
+.vscode/*
