@@ -193,6 +193,9 @@ void update(double *arr, struct Neighbors *neighbors) {
     }
 
     MPI_Waitall(2 * count, requests, statuses);
+
+    free(requests);
+    free(statuses);
 }
 
 
@@ -392,6 +395,33 @@ int main(int argc, char *argv[]) {
     //     fclose(fp);
     // }
 
+    free(sendcounts_n);
+    free(displs_n);
+    free(sendcounts_m);
+    free(displs_m);
+
+    if (neighbors.top_proc_num != -1) {
+        free(neighbors.to_top_neighbor_values);
+        free(neighbors.from_top_neighbor_values);
+    }
+
+    if (neighbors.left_proc_num != -1) {
+        free(neighbors.to_left_neighbor_values);
+        free(neighbors.from_left_neighbor_values);
+    }
+
+    if (neighbors.right_proc_num != -1) {
+        free(neighbors.to_right_neighbor_values);
+        free(neighbors.from_right_neighbor_values);
+    }
+
+    if (neighbors.bottom_proc_num != -1) {
+        free(neighbors.to_bottom_neighbor_values);
+        free(neighbors.from_bottom_neighbor_values);
+    }
+
+    free(x);
+    free(y);
     free(omega);
 
     // if (rank == root)

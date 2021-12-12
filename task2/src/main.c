@@ -4,8 +4,8 @@
 #include <time.h>
 
 
-int MAX_ITER = 10000;
-double eps = 1e-6;
+int MAX_ITER = 100000;
+double eps = 1e-7;
 
 
 void* strict_malloc(size_t size) {
@@ -119,8 +119,8 @@ int solve(int M, int N, double *omega, double *x, double *y, double eps) {
 
 int main(int argc, char *argv[]) {
     double MIN_X = -1, MAX_X = 2, MIN_Y = -2, MAX_Y = 2;
-    int N = 160;
-    int M = 160;
+    int N = 40;
+    int M = 40;
     double *x = strict_malloc( (M - 1) * sizeof(double) );
     double *y = strict_malloc( (N - 1) * sizeof(double) );
     double *omega = strict_malloc( (N - 1) * (M - 1) * sizeof(double) );
@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
     solve(M, N, omega, x, y, eps);
 
     FILE *fp;
-    fp = fopen("./results/consistent_160_160", "w");
+    fp = fopen("./results/consistent_40_40", "w");
     if (fp == NULL) {
         perror("open failed");
         exit(1);
@@ -152,6 +152,8 @@ int main(int argc, char *argv[]) {
 
     fclose(fp);
 
+    free(x);
+    free(y);
     free(omega);
 
     return 0;
